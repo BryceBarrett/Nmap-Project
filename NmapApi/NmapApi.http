@@ -1,0 +1,6 @@
+@NmapApi_HostAddress = http://localhost:5281
+
+GET {{NmapApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
