@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NmapApi.Helpers.CompareExtensions;
+﻿using NmapApi.Helpers.CompareExtensions;
 using NmapApi.Models;
 using NmapApi.Services;
 

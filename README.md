@@ -2,18 +2,18 @@
 
 Disclaimer: Below dependencies and run guides were completed/tested on a windows machine. I've included steps for macOS as well but they may vary slightly.
 
-### Dependencies
+## Dependencies
 - Visual Studio Code installed (https://code.visualstudio.com/download)
 - C# Dev Kit for VS Code (https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
 - Install .NET 9 SDK. Please install version SDK 9.0.308 and select the installer necessary for you're operating system. (https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
 
 #### MongoDB
 - Download mongoDB shell if not already installed (https://www.mongodb.com/try/download/shell)
-    - If using windows, extract the files to "C:\Users\<user>\AppData\Local\Programs\mongosh" and add the directory path for "mongosh.exe" to your PATH environment variable. If using macOS, you will need to extract the files from the zip file to a directory of your choice for macOS and add the directory path for "mongosh" to your PATH environment variable.
+    - If using windows, extract the files to "C:\Users\\\<user>\AppData\Local\Programs\mongosh" where \<user> is your username and add the directory path where "mongosh.exe" is saved to your PATH environment variable. This will be within the bin folder of the files you just extracted. If using macOS, you will need to extract the files from the zip file to a directory of your choice for macOS and add the directory path for "mongosh" to your PATH environment variable.
 - Download MongoDB community server for the platform of your choice (https://www.mongodb.com/try/download/community).
-    - If using windows, verify MongoDB was installed at "C:\Program Files\MongoDB by default. Add C:\Program Files\MongoDB\Server\<version_number>\bin" and add the directory path to your PATH environment variable. On macOS, verify MongoDB was installed at "/usr/local/mongodb" and add the directory path to your PATH environment variable.
+    - If using windows, verify MongoDB was installed at "C:\Program Files\MongoDB by default. Add "C:\Program Files\MongoDB\Server\\\<version_number>\bin" where \<version_number> is your version number and add the directory path to your PATH environment variable. On macOS, verify MongoDB was installed at "/usr/local/mongodb" and add the directory path to your PATH environment variable.
 
- 1. Once MongoDB is downloaded, please create a directory on your machine to store data. Open a powershell/terminal instance and run the following command replacing "path_to_your_directory" with your actual directory path after creation, ```mongod --dbpath 'path_to_your_directory'```
+ 1. Once MongoDB and it's shell are downloaded, please create a directory on your machine to store data. Open a powershell/terminal instance and run the following command replacing "path_to_your_directory" with your actual directory path after creation, ```mongod --dbpath 'path_to_your_directory'```
  2. Run the mongoDB shell command ```mongosh```
  3. You should now be within the mongoDB shell executable "mongosh". Run the command ```use Nmap```. This will create a new empty database within your locally running mongo server name "Nmap".
  4. Next run the ```db.createCollection("NmapData")``` command to create an empty collection for document storage.
@@ -39,3 +39,14 @@ Note: If the defined application ports (https: 7178 and http: 5281) are already 
 
 5. Navigate to the application URL "https://localhost:7178/swagger". Swagger is included with the application to define the API routes and give you a GUI to interact with the API. Expand the "Nmap" title to see the various routes. You can also directly interact with the endpoints using any tool of your choosing with the following URL prefix "https://localhost:7178/api/Nmap/" and append the API route name/data to that URL. I would recommend using swagger.
 6. Once finished running the API locally, press "Ctrl + C" within your VS code terminal to terminate the running application.
+
+
+## Testing
+
+### Unit Testing
+
+
+### Integration Testing
+
+
+### Load Testing
