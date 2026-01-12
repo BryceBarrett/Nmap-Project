@@ -26,7 +26,7 @@ namespace NmapApi.Business
                     };
                 }
 
-                var res = NmapHelper.RunNmapProcess(hostName);
+                var res = await NmapHelper.RunNmapProcess(hostName);
 
                 // If we have no results, don't save the request.
                 if (res.Count > 0)
@@ -84,7 +84,7 @@ namespace NmapApi.Business
             try
             {
                 // Run a new scan
-                var res = NmapHelper.RunNmapProcess(hostName).FirstOrDefault();
+                var res = (await NmapHelper.RunNmapProcess(hostName)).FirstOrDefault();
 
                 // Save new nmap scan if we have one
                 if (res != null)
