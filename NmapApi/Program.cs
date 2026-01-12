@@ -1,3 +1,4 @@
+using NmapApi.Business;
 using NmapApi.Models;
 using NmapApi.Services;
 
@@ -7,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<NmapDatabaseSettings>(
     builder.Configuration.GetSection("NmapDatabase"));
 
-builder.Services.AddSingleton<NmapService>();
+builder.Services.AddSingleton<INmapService, NmapService>();
+builder.Services.AddScoped<INmapProcessingTasks, NmapProcessingTasks>();
 builder.Services.AddControllers()
     .AddJsonOptions(
         options => options.JsonSerializerOptions.PropertyNamingPolicy = null);

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using NmapApi.Business;
 using NmapApi.Models;
-using NmapApi.Services;
 
 namespace NmapApi.Controllers;
 
@@ -8,24 +8,40 @@ namespace NmapApi.Controllers;
 [Route("api/[controller]")]
 public class NmapController : ControllerBase
 {
-    private readonly NmapService _nmapService;
+    private readonly INmapProcessingTasks _nmapProcTasks;
 
-    public NmapController(NmapService nmapService) =>
-        _nmapService = nmapService;
+    public NmapController(INmapProcessingTasks nmapProcTasks) =>
+        _nmapProcTasks = nmapProcTasks;
 
-    [HttpGet("SendNmapResonse")]
-    public async Task<ActionResult<List<NmapResult>>> SendNmapResonse(string hostName)
+    // Can change this to a POST in the future to pass in request object to specify
+    // various flags and options for running our nmap command. 
+    [HttpGet("SendNmapRequest")]
+    public async Task<ActionResult<ApiResponse>> SendNmapRequest(string hostName)
     {
-        var res = NmapHelper.RunNmapProcess(hostName);
-
-        await _nmapService.CreateAsync(res);
-
-        return res;
+        return await _nmapProcTasks.SendNmapRequest(hostName);
     }
 
-    [HttpGet("GetNmapResonses")]
-    public async Task<ActionResult<List<NmapResult>>> GetNmapResonses()
+    [HttpGet("SendNmapRequestWithReport")]
+    public async Task<ActionResult<ScanReport>> SendNmapRequestWithReport(string hostName)
     {
-        return await _nmapService.GetAsync();
+        return await _nmapProcTasks.SendNmapRequestWithReport(hostName);
+    }
+
+    [HttpGet("GetAllNmapResults")]
+    public async Task<ActionResult<ApiResponse>> GetAllNmapResults()
+    {
+        return await _nmapProcTasks.GetAllNmapResults();
+    }
+
+    [HttpGet("GetNmapResultsByHostname")]
+    public async Task<ActionResult<ApiResponse>> GetNmapResultsByHostname(string hostName)
+    {
+        return await _nmapProcTasks.GetNmapResultsByHostname(hostName);
+    }
+
+    [HttpGet("GetMostRecentNmapResult")]
+    public async Task<ActionResult<ApiResponse>> GetMostRecentNmapResult(string hostName)
+    {
+        return await _nmapProcTasks.GetMostRecentNmapResult(hostName);
     }
 }
